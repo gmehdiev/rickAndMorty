@@ -17,13 +17,44 @@ const initialState: initialState = {
   error: null,
 };
 
-export const FetchPosts = createAsyncThunk("posts", async (URL: string) => {
-  try {
-    const response = await axios.get(URL || CHARACTER_URL);
-    console.log(response);
-    return response.data;
-  } catch (error) {}
-});
+interface data {
+  name: string;
+  species: string;
+  type: string;
+}
+
+export const FetchFilterPosts = createAsyncThunk(
+  "posts/FetchFilterPosts",
+  async ({ name, species, type }: data) => {
+    console.log(name, species, type);
+    try {
+      const response = await axios.get(CHARACTER_URL, {
+        params: {
+          name: name,
+          species: species,
+          type: type,
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const FetchPosts = createAsyncThunk(
+  "posts/FetchPosts",
+  async (URL: string = CHARACTER_URL) => {
+    try {
+      const response = await axios.get(URL);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const CharactersSlice = createSlice({
   name: "characters",
@@ -37,9 +68,24 @@ const CharactersSlice = createSlice({
       })
       .addCase(FetchPosts.fulfilled, (state, action) => {
         state.status = "resolved";
+        if (typeof action.payload.results === "undefined") return;
         state.data = action.payload;
       })
-      .addCase(FetchPosts.rejected, () => {});
+      .addCase(FetchPosts.rejected, (state) => {
+        state.status = "error";
+        console.log("fetch");
+      })
+      .addCase(FetchFilterPosts.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(FetchFilterPosts.fulfilled, (state, action) => {
+        state.status = "resolved";
+        state.data = action.payload;
+      })
+      .addCase(FetchFilterPosts.rejected, () => {
+        console.log("filter");
+      });
   },
 });
 

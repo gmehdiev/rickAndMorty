@@ -14,7 +14,6 @@ export const Posts = () => {
   useEffect(() => {
     dispatch(FetchPosts());
   }, []);
-  console.log(character.data.results);
   return (
     <>
       <NextPrev />
@@ -29,6 +28,8 @@ export const Posts = () => {
         >
           <CircularProgress size="300px" />
         </Box>
+      ) : typeof character.data?.results === "undefined" ? (
+        <>Нихуя нет</>
       ) : (
         <>
           {character.data.results.map((elem) => (
