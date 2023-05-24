@@ -1,14 +1,19 @@
-import { Box } from "@mui/material";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Posts from "./Pages/Posts";
-import { Wrapper } from "./components/Wrappers/Wrapper";
+import { SinglePost } from "./Pages/SinglePost";
+import { Navbar } from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Wrapper>
-        <Posts />
-      </Wrapper>
-    </Box>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Navbar />}>
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id" element={<SinglePost />} />
+          <Route path="*" element={<Navigate to="/posts" />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

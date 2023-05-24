@@ -1,20 +1,35 @@
-import { Box, Button, TextField } from "@mui/material";
-import { useRef, useState } from "react";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import { useRef } from "react";
 import { FetchFilterPosts, FetchPosts } from "../core/store/сharacters.Slice";
 import { useThunkDispatch } from "../core/store/slice";
+import { MySelect } from "./UI/MySelect";
+import { MyTextField } from "./UI/MyTextField";
 
 export const Form = () => {
   const value = useRef({
     name: "",
     species: "",
     type: "",
+    gender: "",
+    status: "",
   });
+
   const dispatch = useThunkDispatch();
   const filter = () => {
+    console.log(value);
     if (
       value.current.name === "" &&
       value.current.species === "" &&
-      value.current.type === ""
+      value.current.type === "" &&
+      value.current.gender === "" &&
+      value.current.status === ""
     ) {
       dispatch(FetchPosts());
       return;
@@ -22,6 +37,9 @@ export const Form = () => {
     console.log(value);
     dispatch(FetchFilterPosts(value.current));
   };
+
+  const gender = ["female", "male", "genderless", "unknown"];
+  const status = ["alive", "dead", "unknown"];
   return (
     <Box
       sx={{
@@ -30,35 +48,20 @@ export const Form = () => {
         flexWrap: "wrap",
       }}
     >
-      <TextField
-        value={value.current.name}
-        onChange={(e) => {
-          value.current.name = e.target.value;
-          filter();
-        }}
-        id="outlined-basic"
-        label="Name"
-        variant="outlined"
+      <MyTextField value={value} field={"name"} filter={filter} />
+      <MyTextField value={value} field={"species"} filter={filter} />
+      <MyTextField value={value} field={"type"} filter={filter} />
+      <MySelect
+        value={value}
+        field={"gender"}
+        filter={filter}
+        mapItem={gender}
       />
-      <TextField
-        value={value.current.species}
-        onChange={(e) => {
-          value.current.species = e.target.value;
-          filter();
-        }}
-        id="outlined-basic"
-        label="Species"
-        variant="outlined"
-      />
-      <TextField
-        value={value.current.type}
-        onChange={(e) => {
-          value.current.type = e.target.value;
-          filter();
-        }}
-        id="outlined-basic"
-        label="Type"
-        variant="outlined"
+      <MySelect
+        value={value}
+        field={"status"}
+        filter={filter}
+        mapItem={status}
       />
     </Box>
   );

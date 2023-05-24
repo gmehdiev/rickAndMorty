@@ -2,12 +2,15 @@ import { Box, IconButton, Typography } from "@mui/material";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import { Post } from "../../core/interfaces/Interface";
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CharacterLi {
   props: Post;
 }
 
 export const CharacterLi: FC<CharacterLi> = ({ props }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -32,6 +35,7 @@ export const CharacterLi: FC<CharacterLi> = ({ props }) => {
         <Typography variant="subtitle1">Gender: {props.gender}</Typography>
       </Box>
       <IconButton
+        onClick={() => navigate(`/posts/${props.id}`)}
         sx={{ width: "150px", height: "150px" }}
         color="primary"
         aria-label="upload picture"

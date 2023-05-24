@@ -10,13 +10,17 @@ export const NextPrev = () => {
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Button
         variant="outlined"
-        onClick={() => dispatch(FetchPosts(character.data.info.prev))}
+        onClick={() =>
+          dispatch(FetchPosts(character.FetchPosts.data.info.prev))
+        }
       >
         PREV
       </Button>
       <Button
         variant="outlined"
-        onClick={() => dispatch(FetchPosts(character.data.info.next))}
+        onClick={() =>
+          dispatch(FetchPosts(character.FetchPosts.data.info.next))
+        }
       >
         NEXT
       </Button>

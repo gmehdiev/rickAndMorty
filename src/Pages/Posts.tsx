@@ -1,11 +1,12 @@
 import { RootState, useThunkDispatch } from "../core/store/slice";
 import { useSelector } from "react-redux";
 import { FetchPosts } from "../core/store/сharacters.Slice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CharacterLi } from "../components/common/CharacterLi";
 import { Box, CircularProgress } from "@mui/material";
 import { NextPrev } from "../components/common/NextPrev";
 import { Form } from "../components/Form";
+import { Wrapper } from "../components/Wrappers/Wrapper";
 
 export const Posts = () => {
   const dispatch = useThunkDispatch();
@@ -16,27 +17,31 @@ export const Posts = () => {
   }, []);
   return (
     <>
-      <NextPrev />
-      <Form />
-      {character.status === "loading" ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CircularProgress size="300px" />
-        </Box>
-      ) : typeof character.data?.results === "undefined" ? (
-        <>Нихуя нет</>
-      ) : (
-        <>
-          {character.data.results.map((elem) => (
-            <CharacterLi key={elem.id} props={elem} />
-          ))}
-        </>
-      )}
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Wrapper>
+          <NextPrev />
+          <Form />
+          {character.FetchPosts.status === "loading" ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress size="300px" />
+            </Box>
+          ) : typeof character.FetchPosts.data?.results === "undefined" ? (
+            <>Нихуя нет</>
+          ) : (
+            <>
+              {character.FetchPosts.data.results.map((elem) => (
+                <CharacterLi key={elem.id} props={elem} />
+              ))}
+            </>
+          )}
+        </Wrapper>
+      </Box>
     </>
   );
 };
