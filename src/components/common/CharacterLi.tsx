@@ -3,6 +3,7 @@ import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import { Post } from "../../core/interfaces/Interface";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface CharacterLi {
   props: Post;
@@ -10,7 +11,7 @@ interface CharacterLi {
 
 export const CharacterLi: FC<CharacterLi> = ({ props }) => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -30,9 +31,15 @@ export const CharacterLi: FC<CharacterLi> = ({ props }) => {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="subtitle1">Species: {props.species}</Typography>
-        <Typography variant="subtitle1">Status: {props.status}</Typography>
-        <Typography variant="subtitle1">Gender: {props.gender}</Typography>
+        <Typography variant="subtitle1">
+          {t("Species")}: {props.species}
+        </Typography>
+        <Typography variant="subtitle1">
+          {t("Status")}: {props.status}
+        </Typography>
+        <Typography variant="subtitle1">
+          {t("Gender")}: {props.gender}
+        </Typography>
       </Box>
       <IconButton
         onClick={() => navigate(`/posts/${props.id}`)}

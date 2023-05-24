@@ -9,9 +9,15 @@ interface MyTextField {
   };
   field: string;
   filter: () => void;
+  label: string;
 }
 
-export const MyTextField: FC<MyTextField> = ({ value, field, filter }) => {
+export const MyTextField: FC<MyTextField> = ({
+  value,
+  field,
+  filter,
+  label,
+}) => {
   return (
     <TextField
       autoComplete="off"
@@ -21,7 +27,7 @@ export const MyTextField: FC<MyTextField> = ({ value, field, filter }) => {
         filter();
       }}
       id="outlined-basic"
-      label={field}
+      label={label}
       variant="standard"
     />
   );

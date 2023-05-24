@@ -1,24 +1,37 @@
 import { FC } from "react";
 import { Post } from "../../core/interfaces/Interface";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface OnePost {
   post: Post;
 }
 
 export const OnePost: FC<OnePost> = ({ post }) => {
-  console.log(post);
+  const { t } = useTranslation();
   return (
     <Box sx={{ display: "flex", color: "text.primary" }}>
       <img src={post.image} />
 
       <Box sx={{ ml: 3 }}>
-        <Typography variant="h3">Name: {post.name}</Typography>
-        <Typography variant="h4">Status: {post.status}</Typography>
-        <Typography variant="h4">Spesies: {post.species}</Typography>
-        <Typography variant="h4">Gender: {post.gender}</Typography>
-        <Typography variant="h4">Birth: {post.origin.name}</Typography>
+        <Typography variant="h3">
+          {t("Name")}: {post.name}
+        </Typography>
+        <Typography variant="h4">
+          {t("Status")}: {post.status}
+        </Typography>
+        <Typography variant="h4">
+          {t("Species")}: {post.species}
+        </Typography>
+        <Typography variant="h4">
+          {t("Gender")}: {post.gender}
+        </Typography>
+        <Typography variant="h4">
+          {t("Birth")}: {post.origin.name}
+        </Typography>
       </Box>
     </Box>
   );
 };
+//   "Next": "Next",
+//   "Prev": "Prev"

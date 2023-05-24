@@ -10,9 +10,16 @@ interface MySelect {
   field: string;
   filter: () => void;
   mapItem: string[];
+  label: string;
 }
 
-export const MySelect: FC<MySelect> = ({ value, field, filter, mapItem }) => {
+export const MySelect: FC<MySelect> = ({
+  value,
+  field,
+  filter,
+  mapItem,
+  label,
+}) => {
   const getChildData = (e: any) => {
     console.log(e.target.value);
     value.current[field] = e.target.value;
@@ -21,7 +28,7 @@ export const MySelect: FC<MySelect> = ({ value, field, filter, mapItem }) => {
 
   return (
     <FormControl variant="standard" sx={{ minWidth: 120 }}>
-      <InputLabel id="demo-simple-select-label">{field}</InputLabel>
+      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         value={value.current[field]}
         onChange={(e) => {
