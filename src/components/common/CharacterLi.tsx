@@ -41,7 +41,9 @@ export const CharacterLi: FC<CharacterLi> = ({ props }) => {
         aria-label="upload picture"
         component="label"
       >
-        <OpenInFullIcon sx={{ width: "100px", height: "100px" }} />
+        <OpenInFullIcon
+          sx={{ width: "100px", height: "100px", color: "text.primary" }}
+        />
       </IconButton>
     </Box>
   );

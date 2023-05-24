@@ -9,7 +9,7 @@ interface OnePost {
 export const OnePost: FC<OnePost> = ({ post }) => {
   console.log(post);
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", color: "text.primary" }}>
       <img src={post.image} />
 
       <Box sx={{ ml: 3 }}>

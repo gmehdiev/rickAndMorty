@@ -14,6 +14,7 @@ interface MyTextField {
 export const MyTextField: FC<MyTextField> = ({ value, field, filter }) => {
   return (
     <TextField
+      autoComplete="off"
       value={value.current[field]}
       onChange={(e) => {
         value.current[field] = e.target.value;

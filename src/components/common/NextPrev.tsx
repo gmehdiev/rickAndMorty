@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { FetchPosts } from "../../core/store/сharacters.Slice";
 import { RootState, useThunkDispatch } from "../../core/store/slice";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 export const NextPrev = () => {
   const dispatch = useThunkDispatch();
   const { character } = useSelector((state: RootState) => state);
+
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Button
@@ -16,6 +17,9 @@ export const NextPrev = () => {
       >
         PREV
       </Button>
+      <Typography variant="h4">
+        Total item: {character.FetchPosts.data.info.count}
+      </Typography>
       <Button
         variant="outlined"
         onClick={() =>

@@ -17,7 +17,13 @@ export const Posts = () => {
   }, []);
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          color: "text.primary",
+        }}
+      >
         <Wrapper>
           <NextPrev />
           <Form />

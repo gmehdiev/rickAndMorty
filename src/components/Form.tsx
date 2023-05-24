@@ -1,11 +1,4 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { useRef } from "react";
 import { FetchFilterPosts, FetchPosts } from "../core/store/сharacters.Slice";
 import { useThunkDispatch } from "../core/store/slice";
