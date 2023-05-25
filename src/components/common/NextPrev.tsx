@@ -24,7 +24,7 @@ export const NextPrev = () => {
         {t("Prev")}
       </Button>
       <Typography variant="h4">
-        Total item: {character.FetchPosts.data.info.count}
+        {t("Total item")}: {character.FetchPosts.data.info.count}
       </Typography>
       <Button
         variant="outlined"
