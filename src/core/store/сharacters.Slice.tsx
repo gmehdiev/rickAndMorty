@@ -41,8 +41,10 @@ const initialState: initialState = {
 
 export const FetchFilterPosts = createAsyncThunk(
   "posts/FetchFilterPosts",
-  async ({ name, species, type, gender, status }: data) => {
-    console.log(name, species, type, gender);
+  async (
+    { name, species, type, gender, status }: data,
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.get(CHARACTER_URL, {
         params: {
@@ -53,10 +55,10 @@ export const FetchFilterPosts = createAsyncThunk(
           status: status,
         },
       });
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue("unknown error");
     }
   }
 );
@@ -66,7 +68,6 @@ export const FetchPosts = createAsyncThunk(
   async (URL: string = CHARACTER_URL) => {
     try {
       const response = await axios.get(URL || CHARACTER_URL);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -79,7 +80,6 @@ export const SingleFetchPost = createAsyncThunk(
   async (id: string | undefined) => {
     try {
       const response = await axios.get(SINGLE_CHARACTER_URL + id);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -104,7 +104,6 @@ const CharactersSlice = createSlice({
       })
       .addCase(FetchPosts.rejected, (state) => {
         state.FetchPosts.status = "error";
-        console.log("fetch");
       })
       .addCase(FetchFilterPosts.pending, (state) => {
         state.FetchPosts.status = "loading";
@@ -113,9 +112,14 @@ const CharactersSlice = createSlice({
       .addCase(FetchFilterPosts.fulfilled, (state, action) => {
         state.FetchPosts.status = "resolved";
         state.FetchPosts.data = action.payload;
+        state.FetchPosts.error = null;
       })
-      .addCase(FetchFilterPosts.rejected, () => {
-        console.log("filter");
+      .addCase(FetchFilterPosts.rejected, (state) => {
+        state.FetchPosts.status = "error";
+        state.FetchPosts.data = {
+          info: { count: 0, pages: 0, next: "", prev: "" },
+          results: [],
+        };
       })
       .addCase(SingleFetchPost.pending, (state) => {
         state.FetchOnePost.status = "loading";

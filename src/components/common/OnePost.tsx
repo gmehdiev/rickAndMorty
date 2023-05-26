@@ -29,6 +29,9 @@ export const OnePost: FC<OnePost> = ({ post }) => {
         <Typography variant="h4">
           {t("Birth")}: {post.origin.name}
         </Typography>
+        <Typography variant="h4">
+          {t("Type")}: {post.type}
+        </Typography>
       </Box>
     </Box>
   );

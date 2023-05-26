@@ -7,7 +7,7 @@ import { CustomThemeProvider } from "./core/theme/theme";
 function App() {
   return (
     <CustomThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/rickAndMorty">
         <Routes>
           <Route element={<Navbar />}>
             <Route path="/posts" element={<Posts />} />

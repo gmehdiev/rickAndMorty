@@ -17,7 +17,6 @@ export const Form = () => {
 
   const dispatch = useThunkDispatch();
   const filter = () => {
-    console.log(value);
     if (
       value.current.name === "" &&
       value.current.species === "" &&
@@ -28,7 +27,6 @@ export const Form = () => {
       dispatch(FetchPosts());
       return;
     }
-    console.log(value);
     dispatch(FetchFilterPosts(value.current));
   };
   const { t } = useTranslation();

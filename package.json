@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://gmehdiev.github.io/rickAndMorty",
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -18,6 +20,8 @@
     "@types/react-redux": "^7.1.25",
     "@types/redux": "^3.6.0",
     "axios": "^1.4.0",
+    "formik": "^2.2.9",
+    "gh-pages": "^5.0.0",
     "i18next": "^22.5.0",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.1",
@@ -25,7 +29,8 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
