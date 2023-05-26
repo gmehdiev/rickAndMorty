@@ -53,8 +53,12 @@ export const MyTextField: FC<MyTextField> = ({
       id="outlined-basic"
       label={label}
       variant="standard"
-      error={!!formik.errors.value}
-      helperText={!!formik.errors.value ? "Разрешенные символы A-Z 1-9" : null}
+      error={!!formik.values.value && !!formik.errors.value}
+      helperText={
+        !!formik.values.value && !!formik.errors.value
+          ? "Разрешенные символы A-Z 1-9"
+          : null
+      }
     />
   );
 };
